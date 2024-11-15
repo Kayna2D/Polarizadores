@@ -56,7 +56,7 @@ def menu3():
         print("3 - Itensidade ao passar pelo segundo polarizador")
         print("4 - Itensidade ao passar pelo terceiro polarizador")
         print("0 - Voltar\n")
-        opcao = int(input("Digite a opcao desejada: "))
+        opcao = int(input("Digite a intenstidade disponivel: "))
 
         if opcao == 1:
             i0_3()
@@ -77,12 +77,14 @@ def menu3():
 def i0_2():
     print()
     print("Entre com a intensidade inicial (W/cm²): ")
-    i0 = float(input())    
+    i0 = float(input())  
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input()))  
     print("Entre com o ângulo do segundo polarizador (em graus): ")
-    theta =  radians(float(input()))
+    theta2 =  radians(float(input()))
 
     i1 = i0/2
-    i2 = i1*( cos(theta)**2)
+    i2 = i1*( cos(theta2 - theta1)**2)
 
     print(f'Intensidade ao passar pelo primeiro polarizador: {Decimal(i1):.3} W/cm²' 
           if checar_casas_decimais(i1) else f'Intensidade ao passar pelo primeiro polarizador: {i1} W/cm²')
@@ -93,11 +95,13 @@ def i1_2():
     print()
     print("Entre com a intensidade ao passar pelo primeiro polarizador (W/cm²): ")
     i1 = float(input())
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input())) 
     print("Entre com o ângulo do segundo polarizador (em graus): ")
-    theta = radians(float(input()))
+    theta2 = radians(float(input()))
 
     i0 = i1*2
-    i2 = i1*( cos(theta)**2)
+    i2 = i1*( cos(theta2 - theta1)**2)
 
     print(f'Intensidade original: {Decimal(i0):.3} W/cm²' 
           if checar_casas_decimais(i0) else f'Intensidade original: {i0} W/cm²')
@@ -108,10 +112,12 @@ def i2_2():
     print()
     print("Entre com a intensidade ao passar pelo segundo polarizador (W/cm²): ")
     i2 = float(input())
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input())) 
     print("Entre com o ângulo do segundo polarizador (em graus): ")
-    theta =  radians(float(input()))
+    theta2 =  radians(float(input()))
 
-    i1 = i2/(cos(theta)**2)
+    i1 = i2/(cos(theta2 - theta1)**2)
     i0 = i1*2
 
     print(f'Intensidade original: {Decimal(i0):.3} W/cm²' 
@@ -123,13 +129,15 @@ def i0_3():
     print()
     print("Entre com a intensidade inicial (W/cm²): ")
     i0 = float(input())    
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input())) 
     print("Entre com o ângulo do segundo polarizador (em graus): ")
     theta2 =  radians(float(input()))
     print("Entre com o ângulo do terceiro polarizador (em graus): ")
     theta3 =  radians(float(input()))
 
     i1 = i0/2
-    i2 = i1*( cos(theta2)**2)
+    i2 = i1*( cos(theta2 - theta1)**2)
     i3 = i2*( cos(theta3 - theta2)**2)
 
     print(f'Intensidade ao passar pelo primeiro polarizador: {Decimal(i1):.3} W/cm²' 
@@ -143,13 +151,15 @@ def i1_3():
     print()
     print("Entre com a intensidade ao passar pelo primeiro polarizador (W/cm²): ")
     i1 = float(input())  
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input())) 
     print("Entre com o ângulo do segundo polarizador (em graus): ")
     theta2 =  radians(float(input()))
     print("Entre com o ângulo do terceiro polarizador (em graus): ")
     theta3 =  radians(float(input()))
 
     i0 = i1*2
-    i2 = i1*( cos(theta2)**2) 
+    i2 = i1*( cos(theta2 - theta1)**2) 
     i3 = i2*( cos(theta3 - theta2)**2)
 
     print(f'Intensidade original: {Decimal(i0):.3} W/cm²' 
@@ -163,12 +173,14 @@ def i2_3():
     print()
     print("Entre com a intensidade ao passar pelo segundo polarizador (W/cm²): ")
     i2 = float(input())  
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input())) 
     print("Entre com o ângulo do segundo polarizador (em graus): ")
     theta2 =  radians(float(input()))
     print("Entre com o ângulo do terceiro polarizador (em graus): ")
     theta3 =  radians(float(input()))
 
-    i1 = i2/( cos(theta2)**2)
+    i1 = i2/( cos(theta2 - theta1)**2)
     i0 = i1*2
     i3 = i2*( cos(theta3 - theta2)**2)
 
@@ -183,13 +195,15 @@ def i3_3():
     print()
     print("Entre com a intensidade ao passar pelo terceiro polarizador (W/cm²): ")
     i3 = float(input())  
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input())) 
     print("Entre com o ângulo do segundo polarizador (em graus): ")
     theta2 =  radians(float(input()))
     print("Entre com o ângulo do terceiro polarizador (em graus): ")
     theta3 =  radians(float(input()))
 
     i2 = i3/( cos(theta3 - theta2)**2)
-    i1 = i2/( cos(theta2)**2)
+    i1 = i2/( cos(theta2 - theta1)**2)
     i0 = i1*2
 
     print(f'Intensidade original: {Decimal(i0):.3} W/cm²' 
