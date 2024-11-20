@@ -1,6 +1,5 @@
-import math
+from math import *
 from  decimal import Decimal
-import numpy as np
 
 def checar_casas_decimais(n):
     str_num = str(n)
@@ -10,13 +9,12 @@ def checar_casas_decimais(n):
         
     casa_decimal = str_num.split('.')[1]
     
-    #decimal_part = decimal_part.rstrip('0')
-    
     return len(casa_decimal) > 3
 
 def menu():
   while True:
-    opcao = int(input("Digite a quantidade de polarizadores(2 ou 3): "))
+    opcao = int(input("Digite a quantidade de polarizadores(2 ou 3, 0 para sair): "))
+    
 
     if opcao == 2:
       menu2()
@@ -25,7 +23,7 @@ def menu():
       menu3()
       print()
     elif opcao == 0:
-        print("Saindo")
+        print("Saindo...")
         break
 
 def menu2():
@@ -34,7 +32,7 @@ def menu2():
         print("1 - Itensidade original")
         print("2 - Itensidade ao passar pelo primeiro polarizador")
         print("3 - Itensidade ao passar pelo segundo polarizador")
-        print("0- Sair\n")
+        print("0 - Voltar\n")
         opcao = int(input("Digite a itensidade disponivel: "))
 
         if opcao == 1:
@@ -47,7 +45,7 @@ def menu2():
             i2_2()
             print()
         elif opcao == 0:
-            print("Saindo...")
+            print("Voltando...")
             break
 
 def menu3():
@@ -57,8 +55,8 @@ def menu3():
         print("2 - Itensidade ao passar pelo primeiro polarizador")
         print("3 - Itensidade ao passar pelo segundo polarizador")
         print("4 - Itensidade ao passar pelo terceiro polarizador")
-        print("0- Sair\n")
-        opcao = int(input("Digite a opcao desejada: "))
+        print("0 - Voltar\n")
+        opcao = int(input("Digite a intenstidade disponivel: "))
 
         if opcao == 1:
             i0_3()
@@ -73,21 +71,23 @@ def menu3():
             i3_3()
             print()
         elif opcao == 0:
-            print("Saindo...")
+            print("Voltando...")
             break
 
 def i0_2():
     print()
     print("Entre com a intensidade inicial (W/cm²): ")
-    i0 = float(input())    
+    i0 = float(input())  
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input()))  
     print("Entre com o ângulo do segundo polarizador (em graus): ")
-    theta = np.radians(float(input()))
+    theta2 =  radians(float(input()))
 
     i1 = i0/2
-    i2 = i1*(np.cos(theta)**2)
+    i2 = i1*( cos(theta2 - theta1)**2)
 
     print(f'Intensidade ao passar pelo primeiro polarizador: {Decimal(i1):.3} W/cm²' 
-          if checar_casas_decimais(i1) else f'Intensidade ao passar pelo segundo polarizador: {i1} W/cm²')
+          if checar_casas_decimais(i1) else f'Intensidade ao passar pelo primeiro polarizador: {i1} W/cm²')
     print(f'Intensidade ao passar pelo segundo polarizador: {Decimal(i2):.3} W/cm²' 
           if checar_casas_decimais(i2) else f'Intensidade ao passar pelo segundo polarizador: {i2} W/cm²')
 
@@ -95,25 +95,29 @@ def i1_2():
     print()
     print("Entre com a intensidade ao passar pelo primeiro polarizador (W/cm²): ")
     i1 = float(input())
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input())) 
     print("Entre com o ângulo do segundo polarizador (em graus): ")
-    theta = np.radians(float(input()))
+    theta2 = radians(float(input()))
 
     i0 = i1*2
-    i2 = i1*(np.cos(theta)**2)
+    i2 = i1*( cos(theta2 - theta1)**2)
 
     print(f'Intensidade original: {Decimal(i0):.3} W/cm²' 
           if checar_casas_decimais(i0) else f'Intensidade original: {i0} W/cm²')
-    print(f'Intensidade original: {Decimal(i2):.3} W/cm²' 
+    print(f'Intensidade ao passar pelo segundo polarizador: {Decimal(i2):.3} W/cm²' 
           if checar_casas_decimais(i2) else f'Intensidade ao passar pelo segundo polarizador: {i2} W/cm²')
 
 def i2_2():
     print()
     print("Entre com a intensidade ao passar pelo segundo polarizador (W/cm²): ")
     i2 = float(input())
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input())) 
     print("Entre com o ângulo do segundo polarizador (em graus): ")
-    theta = np.radians(float(input()))
+    theta2 =  radians(float(input()))
 
-    i1 = i2/(np.cos(theta)**2)
+    i1 = i2/(cos(theta2 - theta1)**2)
     i0 = i1*2
 
     print(f'Intensidade original: {Decimal(i0):.3} W/cm²' 
@@ -125,14 +129,16 @@ def i0_3():
     print()
     print("Entre com a intensidade inicial (W/cm²): ")
     i0 = float(input())    
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input())) 
     print("Entre com o ângulo do segundo polarizador (em graus): ")
-    theta2 = np.radians(float(input()))
+    theta2 =  radians(float(input()))
     print("Entre com o ângulo do terceiro polarizador (em graus): ")
-    theta3 = np.radians(float(input()))
+    theta3 =  radians(float(input()))
 
     i1 = i0/2
-    i2 = i1*(np.cos(theta2)**2)
-    i3 = i2*(np.cos(theta3 - theta2)**2)
+    i2 = i1*( cos(theta2 - theta1)**2)
+    i3 = i2*( cos(theta3 - theta2)**2)
 
     print(f'Intensidade ao passar pelo primeiro polarizador: {Decimal(i1):.3} W/cm²' 
           if checar_casas_decimais(i1) else f'Intensidade ao passar pelo primeiro polarizador: {i1} W/cm²')
@@ -145,14 +151,16 @@ def i1_3():
     print()
     print("Entre com a intensidade ao passar pelo primeiro polarizador (W/cm²): ")
     i1 = float(input())  
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input())) 
     print("Entre com o ângulo do segundo polarizador (em graus): ")
-    theta2 = np.radians(float(input()))
+    theta2 =  radians(float(input()))
     print("Entre com o ângulo do terceiro polarizador (em graus): ")
-    theta3 = np.radians(float(input()))
+    theta3 =  radians(float(input()))
 
     i0 = i1*2
-    i2 = i1*(np.cos(theta2)**2) 
-    i3 = i2*(np.cos(theta3 - theta2)**2)
+    i2 = i1*( cos(theta2 - theta1)**2) 
+    i3 = i2*( cos(theta3 - theta2)**2)
 
     print(f'Intensidade original: {Decimal(i0):.3} W/cm²' 
           if checar_casas_decimais(i0) else f'Intensidade original: {i0} W/cm²')
@@ -165,14 +173,16 @@ def i2_3():
     print()
     print("Entre com a intensidade ao passar pelo segundo polarizador (W/cm²): ")
     i2 = float(input())  
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input())) 
     print("Entre com o ângulo do segundo polarizador (em graus): ")
-    theta2 = np.radians(float(input()))
+    theta2 =  radians(float(input()))
     print("Entre com o ângulo do terceiro polarizador (em graus): ")
-    theta3 = np.radians(float(input()))
+    theta3 =  radians(float(input()))
 
-    i1 = i2/(np.cos(theta2)**2)
+    i1 = i2/( cos(theta2 - theta1)**2)
     i0 = i1*2
-    i3 = i2*(np.cos(theta3 - theta2)**2)
+    i3 = i2*( cos(theta3 - theta2)**2)
 
     print(f'Intensidade original: {Decimal(i0):.3} W/cm²' 
           if checar_casas_decimais(i0) else f'Intensidade original: {i0} W/cm²')
@@ -185,13 +195,15 @@ def i3_3():
     print()
     print("Entre com a intensidade ao passar pelo terceiro polarizador (W/cm²): ")
     i3 = float(input())  
+    print("Entre com o ângulo do primeiro polarizador (em graus): ")
+    theta1 =  radians(float(input())) 
     print("Entre com o ângulo do segundo polarizador (em graus): ")
-    theta2 = np.radians(float(input()))
+    theta2 =  radians(float(input()))
     print("Entre com o ângulo do terceiro polarizador (em graus): ")
-    theta3 = np.radians(float(input()))
+    theta3 =  radians(float(input()))
 
-    i2 = i3/(np.cos(theta3 - theta2)**2)
-    i1 = i2/(np.cos(theta2)**2)
+    i2 = i3/( cos(theta3 - theta2)**2)
+    i1 = i2/( cos(theta2 - theta1)**2)
     i0 = i1*2
 
     print(f'Intensidade original: {Decimal(i0):.3} W/cm²' 
@@ -201,12 +213,16 @@ def i3_3():
     print(f'Intensidade ao passar pelo segundo polarizador: {Decimal(i2):.3} W/cm²' 
           if checar_casas_decimais(i2) else f'Intensidade ao passar pelo segundo polarizador: {i3} W/cm²')
 
-print("Autor: Kayna de Deus Ferreira da Silva")
+
+
+print("Polarizadores de luz")
+
+print("Autores:")
+print("Kayna de Deus Ferreira da Silva")
+print("Mario Eugenio Silva")
 print()
 print("------------------------------------------------------------------------------------")
 print()
-print("Polarizadores de luz")
-print("Programa que realiza as operacoes relevantes a quantizacao e ao atomo de Bohr")
 print("Quando uma luz nao polarizada passa por certos materiais (como filtros polarizadores) \n"
       "as oscilações podem ser limitadas a uma única direção, \n"
       "resultando em luz polarizada - similar a uma corda que pode vibrar em várias direções sendo forçada a \n"
